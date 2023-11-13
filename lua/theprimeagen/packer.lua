@@ -49,6 +49,10 @@ return require('packer').startup(function(use)
 	use('nvim-treesitter/playground')
 
 	use {
+		'nvim-lualine/lualine.nvim',
+		requires = { 'nvim-tree/nvim-web-devicons', opt = true }
+	}
+	--[[use {
 		'VonHeikemen/lsp-zero.nvim',
 		branch = 'v3.x',
 		requires = {
@@ -64,5 +68,5 @@ return require('packer').startup(function(use)
 			{'L3MON4D3/LuaSnip'},
 		}
 	}
-
+	]]
 end)
