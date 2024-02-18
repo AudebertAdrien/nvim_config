@@ -8,18 +8,10 @@ return require('packer').startup(function(use)
 	use 'wbthomason/packer.nvim'
 
 	-- theme
-	use({
-		'Mofiqul/dracula.nvim',
-		config = function()
-			vim.cmd('colorscheme dracula')
-		end
-	})
+	use { "catppuccin/nvim", as = "catppuccin" }
 
 	-- 42
-	use 'pbondoer/vim-42header' 
-
-	-- css
-	use 'lilydjwg/colorizer'
+ 	use 'pbondoer/vim-42header' 
 
 	-- switch quickly between saved file 'u''i''o''p'
 	use('nvim-lua/plenary.nvim')
@@ -52,21 +44,5 @@ return require('packer').startup(function(use)
 		'nvim-lualine/lualine.nvim',
 		requires = { 'nvim-tree/nvim-web-devicons', opt = true }
 	}
-	--[[use {
-		'VonHeikemen/lsp-zero.nvim',
-		branch = 'v3.x',
-		requires = {
-			--- Uncomment these if you want to manage LSP servers from neovim
-			{'williamboman/mason.nvim'},
-			{'williamboman/mason-lspconfig.nvim'},
 
-			-- LSP Support
-			{'neovim/nvim-lspconfig'},
-			-- Autocompletion
-			{'hrsh7th/nvim-cmp'},
-			{'hrsh7th/cmp-nvim-lsp'},
-			{'L3MON4D3/LuaSnip'},
-		}
-	}
-	]]
 end)
