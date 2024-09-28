@@ -4,32 +4,19 @@
 vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function(use)
-	-- Packer can manage itself
 	use 'wbthomason/packer.nvim'
 
-	-- theme
 	use { "catppuccin/nvim", as = "catppuccin" }
 
-	-- 42
- 	use 'pbondoer/vim-42header' 
-
-	-- switch quickly between saved file 'u''i''o''p'
-	use('nvim-lua/plenary.nvim')
-	use('ThePrimeagen/harpoon')
+	use 'nvim-lua/plenary.nvim'
+	use 'ThePrimeagen/harpoon'
 
 	use 'mbbill/undotree'
 
 	use 'nvim-tree/nvim-web-devicons'
+	use 'nvim-lualine/lualine.nvim'
 
-	use {
-		'nvim-telescope/telescope.nvim', tag = '0.1.3',
-		requires = { {'nvim-lua/plenary.nvim'} }
-	}
-
-	use {
-		'nvim-lualine/lualine.nvim',
-		requires = { 'kyazdani42/nvim-web-devicons', opt = true }
-	}
+	use 'nvim-telescope/telescope.nvim'
 
 	use {
 		'nvim-treesitter/nvim-treesitter',
@@ -37,12 +24,6 @@ return require('packer').startup(function(use)
 			local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
 			ts_update()
 		end,
-	}
-	use('nvim-treesitter/playground')
-
-	use {
-		'nvim-lualine/lualine.nvim',
-		requires = { 'nvim-tree/nvim-web-devicons', opt = true }
 	}
 
 end)
