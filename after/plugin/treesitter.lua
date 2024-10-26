@@ -1,62 +1,85 @@
-require'nvim-treesitter.configs'.setup {
-	-- A list of parser names, or "all"
+-- Treesitter Commands Reference:
+-- :TSInstall <language>          - Installs the specified parser (e.g., :TSInstall python)
+-- :TSInstallInfo                 - Shows installed parsers and their status
+-- :TSUpdate                      - Updates all installed parsers
+-- :TSUpdateSync                  - Synchronously updates all parsers (useful for scripting)
+-- :TSUninstall <language>        - Uninstalls the specified parser
+-- :TSEnable <module>             - Enables a specific Treesitter module (e.g., highlight)
+-- :TSDisable <module>            - Disables a specific Treesitter module
+-- :TSEnableAll                   - Enables all Treesitter modules for current buffer
+-- :TSDisableAll                  - Disables all Treesitter modules for current buffer
+-- :TSPlaygroundToggle            - Opens the Treesitter playground for inspecting syntax nodes
+-- :TSHighlightCapturesUnderCursor - Shows highlight groups for syntax under the cursor
 
-	-- ensure_installed = {"c"},
+require'nvim-treesitter.configs'.setup {
+	-- Specify which language parsers to install; "all" installs all available parsers
+	-- Modify this list to include or exclude languages as desired
 	ensure_installed = {"python", "lua", "javascript", "typescript", "c", "cpp", "rust" },
 
-	-- Install parsers synchronously (only applied to `ensure_installed`)
+	-- Choose whether parsers should be installed synchronously when using `ensure_installed`
+	-- Useful for automated setup or scripts; async installs are generally faster
 	sync_install = false,
 
-	-- Automatically install missing parsers when entering buffer
-	-- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
+	-- Auto-install missing parsers when opening files
+	-- Recommended to set to `false` if `tree-sitter` CLI is not installed on your system
 	auto_install = true,
 
+	-- Highlight settings
 	highlight = {
-		-- `false` will disable the whole extension
+		-- Enables the Treesitter-based syntax highlighting
 		enable = true,
+
+		-- Whether to run `:h syntax` and Treesitter at the same time.
+		-- Set to `true` if you rely on `vim` syntax highlighting in addition to Treesitter
 		additional_vim_regex_highlighting = false,
+
+		-- Disable Treesitter highlighting for specific languages
+		-- Example: `vimdoc` parser has known issues, so it's disabled here
 		disable = { "vimdoc" },
 	},
 
+	-- Incremental selection based on the current cursor position
 	incremental_selection = {
 		enable = true,
 		keymaps = {
-			init_selection = "gnn",
-			node_incremental = "grn",
-			scope_incremental = "grc",
-			node_decremental = "grm",
+			init_selection = "gnn",       -- Start selection with `gnn`
+			node_incremental = "grn",     -- Expand selection to the next "node" with `grn`
+			scope_incremental = "grc",    -- Expand selection to the scope with `grc`
+			node_decremental = "grm",     -- Shrink selection with `grm`
 		},
 	},
 
+	-- Text object selection, allowing quick selection of code blocks by syntax nodes
 	textobjects = {
 		select = {
 			enable = true,
-			lookahead = true,
+			lookahead = true,             -- Automatically jump to the next match
 			keymaps = {
-				["af"] = "@function.outer",
-				["if"] = "@function.inner",
-				["ac"] = "@class.outer",
-				["ic"] = "@class.inner",
+				["af"] = "@function.outer", -- Select the entire function block
+				["if"] = "@function.inner", -- Select only the inner part of the function
+				["ac"] = "@class.outer",    -- Select the entire class block
+				["ic"] = "@class.inner",    -- Select only the inner part of the class
 			},
 		},
 	},
 
+	-- Treesitter playground settings, providing an interactive environment to experiment with Treesitter
 	playground = {
-		enable = true,
-		disable = {},
-		updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
-		persist_queries = false, -- Whether the query persists across vim sessions
+		enable = true,                     -- Enable the playground
+		disable = {},                      -- Specify languages to disable playground for
+		updatetime = 25,                   -- Debounce time for playground refresh (milliseconds)
+		persist_queries = false,           -- Whether playground queries persist between sessions
 		keybindings = {
-			toggle_query_editor = 'o',
-			toggle_hl_groups = 'i',
-			toggle_injected_languages = 't',
-			toggle_anonymous_nodes = 'a',
-			toggle_language_display = 'I',
-			focus_language = 'f',
-			unfocus_language = 'F',
-			update = 'R',
-			goto_node = '<cr>',
-			show_help = '?',
+			toggle_query_editor = 'o',         -- Open query editor with `o`
+			toggle_hl_groups = 'i',            -- Toggle highlight groups with `i`
+			toggle_injected_languages = 't',   -- Toggle injected languages with `t`
+			toggle_anonymous_nodes = 'a',      -- Toggle anonymous nodes with `a`
+			toggle_language_display = 'I',     -- Toggle language display with `I`
+			focus_language = 'f',              -- Focus on language under cursor with `f`
+			unfocus_language = 'F',            -- Unfocus language with `F`
+			update = 'R',                      -- Refresh the playground with `R`
+			goto_node = '<cr>',                -- Jump to node under cursor with Enter
+			show_help = '?',                   -- Show playground help with `?`
 		},
 	},
 }
