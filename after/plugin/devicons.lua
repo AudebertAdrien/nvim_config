@@ -1,52 +1,54 @@
 require'nvim-web-devicons'.setup {
- -- your personnal icons can go here (to override)
- -- you can specify color or cterm_color instead of specifying both of them
- -- DevIcon will be appended to `name`
- override = {
-  zsh = {
-    icon = "",
-    color = "#428850",
-    cterm_color = "65",
-    name = "Zsh"
-  }
- };
- -- globally enable different highlight colors per icon (default to true)
- -- if set to false all icons will have the default icon's color
- color_icons = true;
- -- globally enable default icons (default to false)
- -- will get overriden by `get_icons` option
- default = true;
- -- globally enable "strict" selection of icons - icon will be looked up in
- -- different tables, first by filename, and if not found by extension; this
- -- prevents cases when file doesn't have any extension but still gets some icon
- -- because its name happened to match some extension (default to false)
- strict = true;
- -- same as `override` but specifically for overrides by filename
- -- takes effect when `strict` is true
- override_by_filename = {
-  [".gitignore"] = {
-    icon = "",
-    color = "#f1502f",
-    name = "Gitignore"
-  }
- };
- -- same as `override` but specifically for overrides by extension
- -- takes effect when `strict` is true
- override_by_extension = {
-  ["log"] = {
-    icon = "",
-    color = "#81e043",
-    name = "Log"
-  }
- };
- -- same as `override` but specifically for operating system
- -- takes effect when `strict` is true
- override_by_operating_system = {
-  ["apple"] = {
-    icon = "",
-    color = "#A2AAAD",
-    cterm_color = "248",
-    name = "Apple",
-  },
- };
+    -- Override specific icons with custom settings
+    -- Define personalized icons, colors, and terminal colors here
+    -- Icons specified here will replace defaults with your choices
+    override = {
+        zsh = {
+            icon = "",             -- Icon for zsh files
+            color = "#428850",       -- Hex color for the zsh icon
+            cterm_color = "65",      -- Terminal color code for the zsh icon
+            name = "Zsh"             -- Icon name used for zsh files
+        }
+    },
+
+    -- Color Configuration
+    color_icons = true,              -- Enable unique colors per icon (default true)
+
+    -- Default Icon Configuration
+    default = true,                  -- Enable default icons for files without specific icons
+
+    -- Strict Selection Mode
+    strict = true,                   -- Enable strict selection of icons based on filename and extension
+
+    -- Filename Overrides
+    -- Assign specific icons to filenames regardless of extension
+    -- Useful for files like .gitignore where a unique icon is desired
+    override_by_filename = {
+        [".gitignore"] = {
+            icon = "",             -- Icon for .gitignore files
+            color = "#f1502f",       -- Hex color for the gitignore icon
+            name = "Gitignore"       -- Name used for .gitignore icon
+        }
+    },
+
+    -- Extension Overrides
+    -- Assign specific icons to files based on their extension
+    override_by_extension = {
+        ["log"] = {
+            icon = "",             -- Icon for .log files
+            color = "#81e043",       -- Hex color for log files
+            name = "Log"             -- Icon name used for .log files
+        }
+    },
+
+    -- Operating System Overrides
+    -- Assign specific icons based on operating system, if desired
+    override_by_operating_system = {
+        ["apple"] = {
+            icon = "",             -- Icon for Apple operating system files
+            color = "#A2AAAD",       -- Hex color for Apple files
+            cterm_color = "248",     -- Terminal color code for Apple icon
+            name = "Apple"           -- Name used for Apple icon
+        }
+    }
 }
