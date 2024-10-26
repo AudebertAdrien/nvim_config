@@ -1,0 +1,96 @@
+  image: node:22.9.0-alpine3.19
+
+  stages:
+    - build
+    - test
+    - deploy review
+    - deploy staging
+    - deploy production
+    - production tests
+
+  before_script:
+    - apk update && apk add curl && apk add nodejs npm
+
+  cache:
+    key:
+      files:
+        - package-lock.json
+    paths:
+      - node_modules/
+
+  variables:
+    STAGING_DOMAIN: www.youtube.com
+    PRODUCTION_DOMAIN: www.google.com
+
+    build_backend:
+    stage: build
+    script:
+      - npm install
+      - npm install -g gatsby-cli
+      - gatsby build
+      - sed -i "s/%%VERSION%%/$CI_COMMIT_SHORT_SHA/" ./public/index.html
+    artifacts:
+      paths:
+        - public/
+
+  run_tests:
+    stage: test
+    variables:
+      NODE_ENV: test
+    script:
+      - npm test
+
+  deploy_review:
+    stage: deploy review
+    only:
+      - merge_requests
+    environment:
+      name: review/$CI_COMMIT_REF_NAME 
+      url: https://my-domain-$CI_ENVIRONMENT_SLUG.com
+    script:
+      - curl -s -o /dev/null -w "%{http_code}" https://$STAGING_DOMAIN | grep 200
+
+  #when: manual  # Can also be set to automatic if desired
+  stop_review:
+    stage: deploy review
+    variables:
+      GIT_STRATEGY: none
+    only:
+      - merge_requests
+    environment:
+      name: review/$CI_COMMIT_REF_NAME
+      action: stop 
+    when: manual
+    script:
+      - echo "Stopping Preview Environment"
+
+  deploy_staging:
+    stage: deploy staging
+    environment:
+      name: staging
+      url: https://$STAGING_DOMAIN
+    only:
+      - master
+    script:
+      - curl -s -o /dev/null -w "%{http_code}" https://$STAGING_DOMAIN | grep 200
+
+  deploy_production:
+    stage: deploy production
+    environment:
+      name: production
+      url: https://$PRODUCTION_DOMAIN 
+    only:
+      - master
+    when: manual
+    script:
+      - curl -s -o /dev/null -w "%{http_code}"  https://$PRODUCTION_DOMAIN | grep 200
+
+  production_test:
+    stage: production tests
+    needs:
+      - deploy_production
+    when: on_success
+    only:
+      - master
+    script:
+      - curl -s -o /dev/null -w "%{http_code}" https://$PRODUCTION_DOMAIN | grep 200

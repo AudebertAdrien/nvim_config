@@ -4,7 +4,7 @@ local actions_state = require('telescope.actions.state')
 
 require('telescope').setup{
 	defaults = {
-		layout_strategy = "horizontal",                  -- Use flex layout for dynamic switching
+		layout_strategy = "vertical",                  -- Use flex layout for dynamic switching
 		layout_config = {
 			prompt_position = "top",
 			width = 0.8,                             -- Use 80% of the editor width

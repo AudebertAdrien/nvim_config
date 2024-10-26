@@ -1,0 +1,32 @@
+  image: node:22.9.0-alpine3.19
+
+  stages:
+    - build
+    - test
+
+  cache:
+    key:
+      files:
+        - package-lock.json
+    paths:
+      - node_modules/
+
+  variables:
+    STAGING_DOMAIN: www.youtube.com
+    PRODUCTION_DOMAIN: www.google.com
+
+  build_website:
+    stage: build
+    script:
+      - npm install
+      - npm install -g gatsby-cli
+      - gatsby build
+      #- sed -i "s/%%VERSION%%/$CI_COMMIT_SHORT_SHA/" ./public/index.html
+    artifacts:
+      paths:
+        - public/
+
+  run_tests:
+    stage: test
+    script:
+      - grep -q "Gatsby" ./public/index.html

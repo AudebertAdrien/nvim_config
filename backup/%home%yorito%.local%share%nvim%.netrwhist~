@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =9
+let g:netrw_dirhist_9='/home/yorito'
+let g:netrw_dirhist_8='/home'
+let g:netrw_dirhist_7='/home/yorito'
+let g:netrw_dirhist_6='/home/yorito/Program/ft_transcendence/pong/game'
+let g:netrw_dirhist_5='/home/yorito/Program/ft_transcendence/pong'
+let g:netrw_dirhist_4='/home/yorito/Program/ft_transcendence'
+let g:netrw_dirhist_3='/home/yorito'
+let g:netrw_dirhist_2='/home/yorito/Program/ft_transcendence/pong/game'
+let g:netrw_dirhist_1='/home/yorito/Program/ft_transcendence/pong'
+let g:netrw_dirhist_0='/home/yorito/Program/ft_transcendence'
