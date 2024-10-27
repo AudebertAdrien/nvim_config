@@ -2,7 +2,7 @@
 vim.g.mapleader = " "
 
 -- Shortcut to open file explorer with <leader>pv (useful for navigating directories)
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+-- vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
 -- Disable Ruby and Perl providers; ignore warnings if these providers are not needed
 vim.g.loaded_ruby_provider = 0
@@ -60,3 +60,4 @@ vim.api.nvim_create_autocmd("FileType", {
         }
     end,
 })
+vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)

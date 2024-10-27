@@ -14,7 +14,23 @@
 require'nvim-treesitter.configs'.setup {
 	-- Specify which language parsers to install; "all" installs all available parsers
 	-- Modify this list to include or exclude languages as desired
-	ensure_installed = {"python", "lua", "javascript", "typescript", "c", "cpp", "rust" },
+	ensure_installed = {
+		"html", 
+		"css", 
+		"scss",
+		"javascript", 
+		"typescript", 
+		"c", 
+		"cpp", 
+		"rust", 
+		"python", 
+		"lua", 
+		"json", 
+		"make",
+		"nginx",
+		"sql",
+		"tmux"
+	},
 
 	-- Choose whether parsers should be installed synchronously when using `ensure_installed`
 	-- Useful for automated setup or scripts; async installs are generally faster
@@ -46,20 +62,6 @@ require'nvim-treesitter.configs'.setup {
 			node_incremental = "grn",     -- Expand selection to the next "node" with `grn`
 			scope_incremental = "grc",    -- Expand selection to the scope with `grc`
 			node_decremental = "grm",     -- Shrink selection with `grm`
-		},
-	},
-
-	-- Text object selection, allowing quick selection of code blocks by syntax nodes
-	textobjects = {
-		select = {
-			enable = true,
-			lookahead = true,             -- Automatically jump to the next match
-			keymaps = {
-				["af"] = "@function.outer", -- Select the entire function block
-				["if"] = "@function.inner", -- Select only the inner part of the function
-				["ac"] = "@class.outer",    -- Select the entire class block
-				["ic"] = "@class.inner",    -- Select only the inner part of the class
-			},
 		},
 	},
 

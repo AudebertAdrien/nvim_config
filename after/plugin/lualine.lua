@@ -13,7 +13,7 @@ require('lualine').setup {
     ignore_focus = {},               -- Ignore certain file types to keep lualine active
 
     always_divide_middle = true,     -- Separate left and right sections when space allows
-    globalstatus = false,             -- Use a single global status line (set true to enable)
+    globalstatus = true,             -- Use a single global status line (set true to enable)
     refresh = {                      -- Refresh rate (in ms) for statusline, tabline, and winbar
       statusline = 1000,
       tabline = 1000,

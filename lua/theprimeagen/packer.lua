@@ -26,10 +26,12 @@ return require('packer').startup(function(use)
     use 'ThePrimeagen/harpoon'
 
     -- UndoTree: Visualize and navigate through file undo history
-    use 'mbbill/undotree'
+	use 'mbbill/undotree'
 
     -- Icons: Provides file-type icons for a better user experience, especially in file explorers and status lines
     use 'nvim-tree/nvim-web-devicons'
+
+	use 'nvim-tree/nvim-tree.lua'
 
     -- Status Line: Lualine
     -- A highly customizable status line to display essential information (e.g., mode, file type, Git status)
